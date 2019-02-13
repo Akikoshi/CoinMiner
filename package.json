@@ -1,0 +1,19 @@
+{
+  "name": "coinwriter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cwTest",
+    "start": "node index.js"
+  },
+  "author": "Semjasa",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.4.2",
+    "colors": "^1.3.3",
+    "nodemon": "^1.18.10",
+    "auto-install": "^1.7.4",
+    "moment": "^2.24.0"
+  }
+}
