@@ -61,7 +61,7 @@ client.on('message', async message => {
         .addField('Server Name', message.guild.name)
         .addField('Erstellt am', message.guild.createdAt)
         .addField('Gejoined am', message.member.joinedAt)
-        .addField('Mitglieder gesamt', message.guild.memberCount);
+        .addField('Mitglieder gesamt', message.guild.memberCount - message.guild.roles.find(role => role.name === "Bot").members.map(m => m.user.tag));
 
         return message.channel.send(richEmbed)
     }
