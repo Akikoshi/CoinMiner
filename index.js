@@ -38,7 +38,7 @@ client.on('message', async message => {
         }
     });
 
-    if(msg === `${cw$}help`){
+    if(msg === `${prefix}help`){
         let icon = client.user.displayAvatarURL;
         let richEmbed = embed
         .setDescription('Economy Information')
