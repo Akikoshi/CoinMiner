@@ -2,11 +2,18 @@ const Discord = require('discord.js');
 const FileSystem = require('fs');
 const Moment = require('moment');
 const Config = JSON.parse(FileSystem.readFileSync('config.json', 'utf8'));
-var client = new Discord.Client();
+var client = new Discord.Client({disableEveryone: true});
+var embed = new Discord.RichEmbed();
 
 let userData = JSON.parse(FileSystem.readFileSync('Storage/userData.json', 'utf8'));
 
-client.on('message', message => {
+client.on('ready', async () => {
+    
+    console.log(`${client.user.username} logged in!`);
+    console.log('Economy System online...');
+});
+
+client.on('message', async message => {
     var sender = message.author;
     var msg = message.content.toLowerCase();
     var prefix = Config.prefix;
@@ -31,6 +38,19 @@ client.on('message', message => {
         }
     });
 
+    if(msg === `${cw$}help`){
+        let icon = client.user.displayAvatarURL;
+        let richEmbed = embed
+        .setDescription('Economy Information')
+        .setAuthor(`${client.user.username}`)
+        .setThumbnail(icon)
+        .setColor('#e8df63')
+        .addField('cw$balance', 'Gibt den Wert des Accounts wieder.')
+        .addField('cw$daily', 'Fügt eurem Account ein tägliches Geschenk hinzu.');
+
+        return message.channel.send(richEmbed)
+    }
+
     if(msg === `${prefix}ping`){
         message.channel.send('Pong!')
     }
@@ -41,7 +61,7 @@ client.on('message', message => {
             userData[sender.id + message.guild.id].money += 50;
             message.channel.send({'embed': {
                 title: 'Tägliche Belohnung',
-                description: 'Deinem Account wurden 500 coins gutgeschrieben!'
+                description: 'Deinem Account wurden 50 coins gutgeschrieben!'
             }})
         }else{
             message.channel.send({'embed': {
@@ -72,10 +92,6 @@ client.on('message', message => {
             }]
         }});
     }
-});
-
-client.on('ready', () => {
-    console.log('Economy System online...');
 });
 
 client.login(Config.token);
