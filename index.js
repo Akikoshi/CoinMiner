@@ -18,7 +18,7 @@ client.on('message', message => {
     }
 
     if(!userData[sender.id + message.guild.id].money){
-        userData[sender.id + message.guild.id].money = 1000;
+        userData[sender.id + message.guild.id].money = 500;
     }
 
     if(!userData[sender.id + message.guild.id].lastDaily){
@@ -38,7 +38,7 @@ client.on('message', message => {
     if(msg === `${prefix}daily`){
         if(userData[sender.id + message.guild.id].lastDaily !== Moment().format('L')){
             userData[sender.id + message.guild.id].lastDaily = Moment().format('L');
-            userData[sender.id + message.guild.id].money += 500;
+            userData[sender.id + message.guild.id].money += 50;
             message.channel.send({'embed': {
                 title: 'Tägliche Belohnung',
                 description: 'Deinem Account wurden 500 coins gutgeschrieben!'
