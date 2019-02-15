@@ -45,8 +45,23 @@ client.on('message', async message => {
         .setAuthor(`${client.user.username}`)
         .setThumbnail(icon)
         .setColor('#e8df63')
+        .addField('cw$serverinfo', 'Zeigt Informationen des Servers an.')
         .addField('cw$balance', 'Gibt den Wert des Accounts wieder.')
         .addField('cw$daily', 'Fügt eurem Account ein tägliches Geschenk hinzu.');
+
+        return message.channel.send(richEmbed)
+    }
+
+    if(msg === `${prefix}serverinfo`){
+        let icon = client.user.displayAvatarURL;
+        let richEmbed = embed
+        .setDescription('Server Information')
+        .setThumbnail(icon)
+        .setColor('#e8df63')
+        .addField('Server Name', message.guild.name)
+        .addField('Erstellt am', message.guild.createdAt)
+        .addField('Gejoined am', message.member.joinedAt)
+        .addField('Mitglieder gesamt', message.guild.memberCount);
 
         return message.channel.send(richEmbed)
     }
